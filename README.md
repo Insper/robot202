@@ -1,11 +1,36 @@
-# Robótica Computacional
+# Robótica Computacional 2020 2.o semestre
 
 [Atividade 1 - Imagens e modelos de cores](./aula01)
+
+## Ferramentas online
+
+
+
+
+
+Abrir repo no Binder
+
+
+
+
+## Projetos antigos
+
+
+
+[Projeto de 2020.1]
+[Exemplo](https://www.youtube.com/watch?v=53aITsVMrow&t=11s) e [Playlist - vai ser aumentada](https://www.youtube.com/playlist?list=PLh9Ibk8NqrdHtjPx56ALZNvH6T2X7PlAe)
+
+[Projeto de 2017](https://www.youtube.com/playlist?list=PLC3gfrt8lFLTbgEM0ASL2cil97i_Gdnef)
+
+[Projeto de 2018](https://www.youtube.com/playlist?list=PLh9Ibk8NqrdFQ3QrnIDEjE7dYfzpcZ6xY)
+
+[Projeto de 2019](https://www.youtube.com/playlist?list=PLh9Ibk8NqrdGZ9czNnsYgYyeFMmOcCkYa)
+
 
 
 ## Provas
 
-[Material de estudo para a Avaliação Final](./revisao/atividades_revisao.md)
+[Material de estudo para Avaliações](./revisao/atividades_revisao.md)
 
 [Lista de provas anteriores (maioria com gabarito)](./revisao/lista_provas_anteriores.md)
 
