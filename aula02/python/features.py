@@ -4,6 +4,8 @@
 
 
 import cv2
+import getopt
+import sys
 
 # Cria o detector BRISK
 brisk = cv2.BRISK_create()
@@ -37,7 +39,18 @@ def find_good_matches(descriptor_image1, frame_gray):
 
 if __name__ == "__main__":
 
-    cap = cv2.VideoCapture(0)
+    if len(sys.argv) > 1:
+        arg = sys.argv[1]
+        try:
+            input_source=int(arg) # se for um device
+        except:
+            input_source=str(arg) # se for nome de arquivo
+    else:   
+        input_source = 0
+
+
+
+    cap = cv2.VideoCapture(input_source)
 
     original_rgb = cv2.imread("arduino_capa.png")  # Imagem a procurar
     img_original = cv2.cvtColor(original_rgb, cv2.COLOR_BGR2GRAY)
