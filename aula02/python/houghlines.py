@@ -23,7 +23,7 @@ if __name__ == '__main__':
     try:
         fn = sys.argv[1]
     except IndexError:
-        fn = "./box.png"
+        fn = "./arduino_capa.png"
 
     src = cv2.imread(fn)
     dst = cv2.Canny(src, 50, 200) # aplica o detector de bordas de Canny à imagem src

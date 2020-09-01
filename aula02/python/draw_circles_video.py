@@ -8,12 +8,26 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 import time
+import sys
 
 # If you want to open a video, just change v2.VideoCapture(0) from 0 to the filename, just like below
 #cap = cv2.VideoCapture('hall_box_battery.mp4')
 
+if len(sys.argv) > 1:
+    arg = sys.argv[1]
+    try:
+        input_source=int(arg) # se for um device
+    except:
+        input_source=str(arg) # se for nome de arquivo
+else:   
+    input_source = 0
+
+cap = cv2.VideoCapture(input_source)
+
+
 # Parameters to use when opening the webcam.
-cap = cv2.VideoCapture(0)
+
+
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
