@@ -58,7 +58,7 @@ while(True):
     # HoughCircles - detects circles using the Hough Method. For an explanation of
     # param1 and param2 please see an explanation here http://www.pyimagesearch.com/2014/07/21/detecting-circles-images-using-opencv-hough-circles/
     circles = None
-    circles=cv2.HoughCircles(bordas,cv2.HOUGH_GRADIENT,2,40,param1=50,param2=100,minRadius=5,maxRadius=60)
+    circles=cv2.HoughCircles(bordas,cv2.HOUGH_GRADIENT,1.5,40,param1=50,param2=100,minRadius=5,maxRadius=150)
 
     if circles is not None:        
         circles = np.uint16(np.around(circles))
@@ -72,15 +72,15 @@ while(True):
 
     angle = 0
     # draw a line between the circles in the image
-    if circles is not None and len(circles[0,:]) > 0:
+    if circles is not None and len(circles[0,:]) > 1:
         for i in circles[0,:]:
             for j in circles[0,:]:
                 if j[0] != i[0] and j[1] != i[1] and j[2] != i[2]:
                     cv2.line(bordas_color,(i[0],i[1]),(j[0],j[1]),(0,100,255),5)
-                    h = ((j[0] - i[0])**2 + (j[1] - i[1])**2)**(0.5)
+                    h = ((int(j[0]) - int(i[0]))**2 + (int(j[1]) - int(i[1]))**2)**(0.5)
                     h /= 2
                     f = 507.6923076923076
-                    angle = np.arctan([h/f])
+                    angle = np.arctan([h/f])[0]
                     
     # cv2.putText(img, text, org, fontFace, fontScale, color[, thickness[, lineType[, bottomLeftOrigin]]])
     font = cv2.FONT_HERSHEY_SIMPLEX
