@@ -3,6 +3,9 @@
 
 import cv2
 
+print("Baixe o arquivo a seguir para funcionar: ")
+print("https://github.com/Insper/robot20/raw/master/aula02/hall_box_battery_1024.mp4")
+
 cap = cv2.VideoCapture('hall_box_battery_1024.mp4')
 
 while(True):
