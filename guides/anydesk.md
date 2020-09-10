@@ -13,4 +13,6 @@ Depois digite:
     wget -qO - https://raw.githubusercontent.com/Insper/404/master/desktop%20ssd/patchs/patch_0_anydesk_chrome.sh | bash patch_0_anydesk_chrome.sh
 
 
+Depois *reinicie o computador*:
 
+    sudo reboot
