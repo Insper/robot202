@@ -8,10 +8,9 @@ Veridique qual é o ID de seu computador. Se ele começar com `684626` por favor
 
     sudo rm /etc/anydesk/service.conf
 
-Depois digite:
+Depois digite no terminal:
 
-    wget -qO - https://raw.githubusercontent.com/Insper/404/master/desktop%20ssd/patchs/patch_0_anydesk_chrome.sh | bash patch_0_anydesk_chrome.sh
-
+    wget -qO - https://raw.githubusercontent.com/Insper/404/master/desktop%20ssd/patchs/patch_0_anydesk_chrome.sh | bash
 
 Depois *reinicie o computador*:
 
