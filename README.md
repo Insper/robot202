@@ -55,6 +55,8 @@ Abrir repo no Binder
 
 ## SSD de Robótica
 
+[Como consertar o Anydesk](./guides/anydesk.md)
+
 [Como fazer o boot do SSD físico na VM](https://github.com/Insper/robot202/blob/master/guides/Boot%20SSD%20via%20VirtualBox.md)
 
 [Restaurar o SSD físico - versão Mac](./guides/SSD_restaurar_mac.md)
