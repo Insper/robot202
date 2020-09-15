@@ -1,3 +1,7 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+
 # Para RODAR
 # python object_detection_webcam.py --prototxt MobileNetSSD_deploy.prototxt.txt --model MobileNetSSD_deploy.caffemodel
 # Credits: https://www.pyimagesearch.com/2017/09/11/object-detection-with-deep-learning-and-opencv/
