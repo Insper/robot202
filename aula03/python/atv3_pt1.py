@@ -1,81 +1,89 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+import time
 
 cap = cv2.VideoCapture('line_following.mp4')
 
-def do_canny(frame):
+def region_of_interest(img, vertices):
+    mask = np.zeros_like(img)
+    #channel_count = img.shape[2]
+    match_mask_color = 255#(255,)*channel_count
+    cv2.fillPoly(mask, vertices, match_mask_color)
+    masked_image = cv2.bitwise_and(img, mask)
+    return masked_image
 
-    gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
-    blur = cv2.GaussianBlur(gray, (5,5), 0)
-    canny = cv2.Canny(blur, 50, 150)
-    return canny
+def draw_the_lines(img, lines):
+    img_copy = np.copy(img)
+    line_img = np.zeros((img.shape[0], img.shape[1], 3), dtype=np.uint8)
+    try:
+        for line in lines:
+            for x1, y1, x2, y2 in line:
+                cv2.line(img_copy, (x1,y1), (x2,y2), (0,255,0), thickness=3)
 
-def do_segment(frame):
+        img_copy = cv2.addWeighted(img_copy, 0.8, line_img, 1, 0.0)
+        return img_copy
+    except:
+        return img_copy
 
-    height = frame.shape[0]
-    polygons = np.array([ [(0, height), (800, height), (380, 290)] ])
-    mask = np.zeros_like(frame)
-    cv2.fillPoly(mask, polygons, 255)
-    segment = cv2.bitwise_and(frame, mask)
-    return segment
+def calc_slope_intercept(x1, y1, x2, y2):
+    slope = (y2-y1)/(x2-x1)
+    intercept = (y1 - slope*x1)
+    return slope, intercept
 
-def calculate_coordinates(frame, parameters):
+def get_two_greatest_line(lines):
+    max_value = 0
+    two_lines = []
+    try:
+        for line in lines:
+            for x1, y1, x2, y2 in line:
+                length = ((x1-x2)**2 + (y1-y2)**2)**0.5
+                if length > max_value:
+                    two_lines.append(line)
+                    max_value = length
+        return two_lines[-2:]
+    except:
+        return []
 
-    slope, intercept = parameters
-    y1 = frame.shape[0]
-    y2 = int(y1-150)
-    x1 = int((y1 - intercept)/slope)
-    x2 = int((y2 - intercept)/slope)
-
-    return np.array([x1,y1,x2,y2])
-
-def calculate_lines(frame, lines):
-
-    left = []
-    right = []
-
-    for line in lines:
-        x1,y1,x2,y2 = line.reshape(4)
-        parameters = np.polyfit((x1, x2), (y1, y2), 1)
-        slope = parameters[0]
-        y_intercept = parameters[1]
-
-        if slope < 0:
-            left.append((slope, y_intercept))
-        else:
-            right.append((slope, y_intercept))
-
-        left_avg = np.average(left, axis=0)
-        right_avg = np.average(right, axis=0)
-        left_line = calculate_coordinates(frame, left_avg)
-        right_line = calculate_coordinates(frame, right_avg)
-
-        return np.array([left_line, right_line])
-
-def visualize_lines(frame, lines):
-
-    lines_visualize = np.zeros_like(frame)
-    if lines is not None:
-        for x1, y1, x2, y2 in lines:
-            cv.line(lines_visualize, (x1, y1), (x2, y2), (0,255,0), 5)
-
-    return lines_visualize
-
-
+def draw_escape_point(img, lines):
+    img_copy = np.copy(img)
+    point_img = np.zeros((img.shape[0], img.shape[1], 3), dtype=np.uint8)
+    lines = get_two_greatest_line(lines)
+    try:
+        a1, b1 = calc_slope_intercept(lines[0][0][0],lines[0][0][1],lines[0][0][2],lines[0][0][3])
+        a2, b2 = calc_slope_intercept(lines[1][0][0],lines[1][0][1],lines[1][0][2],lines[1][0][3])
+        x = (b2-b1)/(a1-a2)
+        y = a1*x + b1
+        x, y = int(np.round(x)), int(np.round(y))
+        cv2.circle(img_copy, (x,y), 1, (0,255,0), thickness=3)
+        img_copy = cv2.addWeighted(img_copy, 0.8, point_img, 1, 0.0)
+        return img_copy
+    except:
+        return img_copy
+    
 while (cap.isOpened()):
 
     ret, frame = cap.read()
-
-    canny = do_canny(frame)
-    segment = do_segment(canny)
-    hough = cv2.HoughLinesP(segment, 2, np.pi / 180, 100, np.array([]), minLineLength = 100, maxLineGap = 50)
-
-    lines = calculate_lines(frame, hough)
-    lines_visualize = visualize_lines(frame, lines)
-    output = cv2.addWeighted(frame, 0.9, lines_visualize, 1, 1)
-
-    cv2.imshow('output', output)
+    
+    height = frame.shape[0]
+    width = frame.shape[1]
+    region_of_interest_vertices = [
+        (0, height), (0, 2*height/3), (width, height), (width, 2*height/3)
+    ]
+    
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    canny = cv2.Canny(gray, 100, 150)
+    
+    masked_img = region_of_interest(canny, np.array([region_of_interest_vertices], np.int32))
+    
+    lines = cv2.HoughLinesP(masked_img, rho=6, theta=np.pi/60, threshold=160, lines=np.array([]), minLineLength=120, maxLineGap=25)
+    
+    output = draw_the_lines(frame, lines)
+    output = draw_escape_point(output, lines)
+    
+    cv2.imshow('frame', output)
+    
+    time.sleep(0.1)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
