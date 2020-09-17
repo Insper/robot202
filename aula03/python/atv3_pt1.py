@@ -55,7 +55,7 @@ def draw_escape_point(img, lines):
         x = (b2-b1)/(a1-a2)
         y = a1*x + b1
         x, y = int(np.round(x)), int(np.round(y))
-        cv2.circle(img_copy, (x,y), 1, (0,255,0), thickness=3)
+        cv2.circle(img_copy, (x,y), 2, (0,255,0), thickness=3)
         img_copy = cv2.addWeighted(img_copy, 0.8, point_img, 1, 0.0)
         return img_copy
     except:
@@ -68,7 +68,7 @@ while (cap.isOpened()):
     height = frame.shape[0]
     width = frame.shape[1]
     region_of_interest_vertices = [
-        (0, height), (0, 2*height/3), (width, height), (width, 2*height/3)
+        (10, height), (10, height/2), (width-10, height), (width-10, height/2)
     ]
     
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -83,7 +83,7 @@ while (cap.isOpened()):
     
     cv2.imshow('frame', output)
     
-    time.sleep(0.1)
+    #time.sleep(0.1)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
