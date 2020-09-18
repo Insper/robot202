@@ -16,39 +16,35 @@ def region_of_interest(img, vertices):
 def draw_the_lines(img, lines):
     img_copy = np.copy(img)
     line_img = np.zeros((img.shape[0], img.shape[1], 3), dtype=np.uint8)
+    lines_dic = dict()
+    for line in lines:
+        for x1, y1, x2, y2 in line:
+            slope, intercept = calc_slope_intercept(x1, y1, x2, y2)
+            if (slope < -0.31) or (slope > 0.43):
+                lines_dic[slope] = line
+    
+    lista_slopes = list(lines_dic.keys())
     try:
-        for line in lines:
-            for x1, y1, x2, y2 in line:
-                cv2.line(img_copy, (x1,y1), (x2,y2), (0,255,0), thickness=3)
-
-        img_copy = cv2.addWeighted(img_copy, 0.8, line_img, 1, 0.0)
-        return img_copy
+        min_slope = min(lista_slopes)
+        max_slope = max(lista_slopes)
+        lines = [lines_dic[min_slope], lines_dic[max_slope]]
     except:
-        return img_copy
+        lines = []
+    for line in lines:
+        for x1, y1, x2, y2 in line:
+            cv2.line(img_copy, (x1,y1), (x2,y2), (0,255,0), thickness=3)
+            
+    img_copy = cv2.addWeighted(img_copy, 0.8, line_img, 1, 0.0)
+    return img_copy, lines
 
 def calc_slope_intercept(x1, y1, x2, y2):
     slope = (y2-y1)/(x2-x1)
     intercept = (y1 - slope*x1)
     return slope, intercept
 
-def get_two_greatest_line(lines):
-    max_value = 0
-    two_lines = []
-    try:
-        for line in lines:
-            for x1, y1, x2, y2 in line:
-                length = ((x1-x2)**2 + (y1-y2)**2)**0.5
-                if length > max_value:
-                    two_lines.append(line)
-                    max_value = length
-        return two_lines[-2:]
-    except:
-        return []
-
 def draw_escape_point(img, lines):
     img_copy = np.copy(img)
     point_img = np.zeros((img.shape[0], img.shape[1], 3), dtype=np.uint8)
-    lines = get_two_greatest_line(lines)
     try:
         a1, b1 = calc_slope_intercept(lines[0][0][0],lines[0][0][1],lines[0][0][2],lines[0][0][3])
         a2, b2 = calc_slope_intercept(lines[1][0][0],lines[1][0][1],lines[1][0][2],lines[1][0][3])
@@ -78,7 +74,7 @@ while (cap.isOpened()):
     
     lines = cv2.HoughLinesP(masked_img, rho=6, theta=np.pi/60, threshold=160, lines=np.array([]), minLineLength=120, maxLineGap=25)
     
-    output = draw_the_lines(frame, lines)
+    output, lines = draw_the_lines(frame, lines)
     output = draw_escape_point(output, lines)
     
     cv2.imshow('frame', output)
