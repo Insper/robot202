@@ -22,7 +22,7 @@ Resolução da Q2 - OpenCV
 
 [https://web.microsoftstream.com/video/d19d7e3e-e833-4ad9-a927-b703817fa39f](https://web.microsoftstream.com/video/d19d7e3e-e833-4ad9-a927-b703817fa39f)
 
-
+Atenção: a solução destas questões está neste [link](https://github.com/Insper/20_sub_rob/tree/gabarito)
 
 
 # Discussão da P2  de 2020
