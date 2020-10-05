@@ -4,12 +4,35 @@
 Lembre-se de que também existem [as provas e simulados anteriores](./lista_provas_anteriores.md).
 
 
+# P1 de 2020
+
+Resolução do exercício 3 - ROS
+
+[https://web.microsoftstream.com/video/0653fc1d-f6de-400f-b706-f86c72fe76e4](https://web.microsoftstream.com/video/0653fc1d-f6de-400f-b706-f86c72fe76e4)
+
+
+
+# SUB de 2020
+
+Resolução da Q1 - OpenCV
+
+[https://web.microsoftstream.com/video/157cc69f-8814-4af7-94f6-7b660d70d8dd](https://web.microsoftstream.com/video/157cc69f-8814-4af7-94f6-7b660d70d8dd)
+
+Resolução da Q2 - OpenCV
+
+[https://web.microsoftstream.com/video/d19d7e3e-e833-4ad9-a927-b703817fa39f](https://web.microsoftstream.com/video/d19d7e3e-e833-4ad9-a927-b703817fa39f)
+
+
+
+
 # Discussão da P2  de 2020
 
 [Discussão feita em aula https://web.microsoftstream.com/video/f039d50f-3f6b-4e01-b45c-f2bffd2cbd84](https://web.microsoftstream.com/video/f039d50f-3f6b-4e01-b45c-f2bffd2cbd84)
 
 Código da solução 
 [https://github.com/mirwox/p2/tree/solution](https://github.com/mirwox/p2/tree/solution)
+
+
 
 
 # 0. Revisão de ROS feita para a P1 
