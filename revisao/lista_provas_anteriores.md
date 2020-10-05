@@ -30,6 +30,7 @@ Solução:
 ## Prova SUB 2020
 
 [Questões: https://github.com/Insper/20_sub_rob](https://github.com/Insper/20_sub_rob)
+[Gabarito de 2 questões de OpenCV](https://github.com/Insper/20_sub_rob/blob/gabarito/)
 
 
 ## Simulado da P1 2019
