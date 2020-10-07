@@ -3,6 +3,20 @@
 # Provas anteriores:
 
 
+## Simulado 2020.2
+
+Questões
+[https://github.com/insper-classroom/20b_rob_sim](https://github.com/insper-classroom/20b_rob_sim)
+
+Solução:
+[https://github.com/insper-classroom/20b_rob_sim/tree/solution](https://github.com/insper-classroom/20b_rob_sim/tree/solution)
+
+[Vídeo da solução da Q1 - alunos Insper](https://web.microsoftstream.com/video/dad549e6-cb96-4e59-bd80-151ed9fdf126)
+
+[Vídeo da solução da Q2 - alunos Insper](https://web.microsoftstream.com/video/71470ed4-cca7-4f77-beec-32043230f48b)
+
+
+
 ## Prova P2 2020 
 
 
