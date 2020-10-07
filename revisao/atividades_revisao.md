@@ -4,6 +4,20 @@
 Lembre-se de que também existem [as provas e simulados anteriores](./lista_provas_anteriores.md).
 
 
+## Simulado de 2020.2
+
+Questões
+[https://github.com/insper-classroom/20b_rob_sim](https://github.com/insper-classroom/20b_rob_sim)
+
+Solução:
+[https://github.com/insper-classroom/20b_rob_sim/tree/solution](https://github.com/insper-classroom/20b_rob_sim/tree/solution)
+
+[Vídeo da solução da Q1 - alunos Insper](https://web.microsoftstream.com/video/dad549e6-cb96-4e59-bd80-151ed9fdf126)
+
+[Vídeo da solução da Q2 - alunos Insper](https://web.microsoftstream.com/video/71470ed4-cca7-4f77-beec-32043230f48b)
+
+
+
 # P1 de 2020
 
 Resolução do exercício 3 - ROS
@@ -31,6 +45,13 @@ Atenção: a solução destas questões está neste [link](https://github.com/In
 
 Código da solução 
 [https://github.com/mirwox/p2/tree/solution](https://github.com/mirwox/p2/tree/solution)
+
+Foi rediscutido no 2.o semestre de 2020:
+[https://web.microsoftstream.com/video/13b75063-0cf7-488d-8b38-3cbc51246ed8?list=studio](https://web.microsoftstream.com/video/13b75063-0cf7-488d-8b38-3cbc51246ed8?list=studio)
+
+Código em:
+[https://github.com/mirwox/p2/blob/revisao20202/p2_20/scripts/Q3_controle.py](https://github.com/mirwox/p2/blob/revisao20202/p2_20/scripts/Q3_controle.py)
+
 
 
 
