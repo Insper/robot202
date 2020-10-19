@@ -32,7 +32,7 @@ Su Mo Tu We Th Fr Sa
 
 Comandos para atualizar os repositórios:
 
-    cd ~catkin_ws/src/my_botdescription
+    cd ~catkin_ws/src/mybot_description
     git stash
     git pull
     cd ~catkin_ws/src/my_simulation
@@ -44,6 +44,10 @@ Comandos para atualizar os repositórios:
 Para executar:
 
 	roslaunch my_simulation pista_s.launch
+
+Para habilitar o controle da garra executar:
+
+	roslaunch mybot_description mybot_control2.launch 	
 	
 Para editar:
 
