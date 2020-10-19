@@ -58,7 +58,7 @@ def rotationMatrixToEulerAngles(R):
 
 
 #--- Get the camera calibration path
-calib_path  = ""
+calib_path  = "/home/borg/catkin_ws/src/robot202/ros/exemplos202/scripts/"
 camera_matrix   = np.loadtxt(calib_path+'cameraMatrix_raspi.txt', delimiter=',')
 camera_distortion   = np.loadtxt(calib_path+'cameraDistortion_raspi.txt', delimiter=',')
 
