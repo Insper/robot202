@@ -30,7 +30,7 @@ Su Mo Tu We Th Fr Sa
 
 <img src="./pista_virtual.jpg">
 
-Comandos para atualizar os repositório:
+Comandos para atualizar os repositórios:
 
     cd ~catkin_ws/src/my_botdescription
     git stash
