@@ -85,7 +85,7 @@ def roda_todo_frame(imagem):
         depois = time.clock()
         # Desnecessário - Hough e MobileNet já abrem janelas
         cv_image = saida_net.copy()
-        cv2.imshow("cv_image no loop principal", cv_image)
+        cv2.imshow("cv_image", cv_image)
         cv2.waitKey(1)
     except CvBridgeError as e:
         print('ex', e)
