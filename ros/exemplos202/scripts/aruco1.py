@@ -31,7 +31,7 @@ camera_distortion   = np.loadtxt(calib_path+'cameraDistortion_raspi.txt', delimi
 aruco_dict  = aruco.getPredefinedDictionary(aruco.DICT_6X6_250)
 parameters  = aruco.DetectorParameters_create()
 parameters.minDistanceToBorder = 0
-parameters.adaptiveThreshWinSizeMax = 1000
+#parameters.adaptiveThreshWinSizeMax = 1000
 
 #-- Font for the text in the image
 font = cv2.FONT_HERSHEY_PLAIN
@@ -58,75 +58,44 @@ def roda_todo_frame(imagem):
 		
 		gray = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY)
 		corners, ids, rejectedImgPoints = aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-		print(ids)
-
-
-		if ids is not None:
+		
+		if ids is not None and ids[0] == id_to_find :
 			#-- ret = [rvec, tvec, ?]
-			#-- rvec = [[rvec_1], [rvec_2], ...] vetor de rotação
-			#-- tvec = [[tvec_1], [tvec_2], ...] vetor de translação
+			#-- array of rotation and position of each marker in camera frame
+			#-- rvec = [[rvec_1], [rvec_2], ...]    attitude of the marker respect to camera frame
+			#-- tvec = [[tvec_1], [tvec_2], ...]    position of the marker in camera frame
 			ret = aruco.estimatePoseSingleMarkers(corners, marker_size, camera_matrix, camera_distortion)
+
+			#-- Unpack the output, get only the first
 			rvec, tvec = ret[0][0,0,:], ret[1][0,0,:]
 
 			#-- Desenha um retanculo e exibe Id do marker encontrado
 			aruco.drawDetectedMarkers(cv_image, corners, ids) 
 			aruco.drawAxis(cv_image, camera_matrix, camera_distortion, rvec, tvec, 1)
+			
+			# Calculo usando distancia Euclidiana 
+			distance = np.sqrt(tvec[0]**2 + tvec[1]**2 + tvec[2]**2)
 
-			#-- Print tvec vetor de tanslação em x y z
+			#-- Print the tag position in camera frame
 			str_position = "Marker x=%4.0f  y=%4.0f  z=%4.0f"%(tvec[0], tvec[1], tvec[2])
 			print(str_position)
 			cv2.putText(cv_image, str_position, (0, 100), font, 1, (0, 255, 0), 1, cv2.LINE_AA)
 
-			##############----- Referencia dos Eixos------###########################
+			#-- Print the tag position in camera frame
+			str_dist = "Dist aruco=%4.0f  scan=%4.0f"%(distance, scan_dist)
+			print(str_dist)
+			cv2.putText(cv_image, str_dist, (0, 15), font, 1, (0, 255, 0), 1, cv2.LINE_AA)
+
 			# Linha referencia em X
 			cv2.line(cv_image, (cv_image.shape[1]/2,cv_image.shape[0]/2), ((cv_image.shape[1]/2 + 50),(cv_image.shape[0]/2)), (0,0,255), 5) 
 			# Linha referencia em Y
 			cv2.line(cv_image, (cv_image.shape[1]/2,cv_image.shape[0]/2), (cv_image.shape[1]/2,(cv_image.shape[0]/2 + 50)), (0,255,0), 5) 	
-			
-			#####################---- Distancia Euclidiana ----#####################
-			# Calcula a distancia usando apenas a matriz tvec, matriz de tanslação
-			# Pode usar qualquer uma das duas formas
-			distance = np.sqrt(tvec[0]**2 + tvec[1]**2 + tvec[2]**2)
-			distancenp = np.linalg.norm(tvec)
-
-			#-- Print distance
-			str_dist = "Dist aruco=%4.0f  dis.np=%4.0f"%(distance, distancenp)
-			print(str_dist)
-			cv2.putText(cv_image, str_dist, (0, 15), font, 1, (0, 255, 0), 1, cv2.LINE_AA)
-
-			#####################---- Distancia pelo foco ----#####################
-			#https://www.pyimagesearch.com/2015/01/19/find-distance-camera-objectmarker-using-python-opencv/
-			
-			# raspicam v2 focal legth 
-			FOCAL_LENGTH = 3.6 #3.04
-        	# pixel por unidade de medida
-			m = (camera_matrix[0][0]/FOCAL_LENGTH + camera_matrix[1][1]/FOCAL_LENGTH)/2
-			# corners[0][0][0][0] = [ID][plano?][pos_corner(sentido horario)][0=valor_pos_x, 1=valor_pos_y]	
-			pixel_length1 = math.sqrt(math.pow(corners[0][0][0][0] - corners[0][0][1][0], 2) + math.pow(corners[0][0][0][1] - corners[0][0][1][1], 2))
-			pixel_length2 = math.sqrt(math.pow(corners[0][0][2][0] - corners[0][0][3][0], 2) + math.pow(corners[0][0][2][1] - corners[0][0][3][1], 2))
-			pixlength = (pixel_length1+pixel_length2)/2
-			dist = marker_size * FOCAL_LENGTH / (pixlength/m)
-			
-			#-- Print distancia focal
-			str_distfocal = "Dist focal=%4.0f"%(dist)
-			print(str_distfocal)
-			cv2.putText(cv_image, str_distfocal, (0, 30), font, 1, (0, 255, 0), 1, cv2.LINE_AA)	
 
 
-			####################--------- desenha o cubo -----------#########################
-			# https://github.com/RaviJoshii/3DModeler/blob/eb7ca48fa06ca85fcf5c5ec9dc4b562ce9a22a76/opencv/program/detect.py			
-			m = marker_size/2
-			pts = np.float32([[-m,m,m], [-m,-m,m], [m,-m,m], [m,m,m],[-m,m,0], [-m,-m,0], [m,-m,0], [m,m,0]])
-			imgpts, _ = cv2.projectPoints(pts, rvec, tvec, camera_matrix, camera_distortion)
-			imgpts = np.int32(imgpts).reshape(-1,2)
-			cv_image = cv2.drawContours(cv_image, [imgpts[:4]],-1,(0,0,255),4)
-			for i,j in zip(range(4),range(4,8)): cv_image = cv2.line(cv_image, tuple(imgpts[i]), tuple(imgpts[j]),(0,0,255),4);
-			cv_image = cv2.drawContours(cv_image, [imgpts[4:]],-1,(0,0,255),4)
-			
+			cv2.putText(cv_image, "%.1f cm -- %.0f deg" % ((tvec[2]), (rvec[2] / 3.1415 * 180)), (0, 230), font, 1, (244, 244, 244), 1, cv2.LINE_AA)
 
 		# Exibe tela
 		cv2.imshow("Camera", cv_image)
-		cv2.imshow("gray", gray)
 		cv2.waitKey(1)
 	except CvBridgeError as e:
 		print('ex', e)
