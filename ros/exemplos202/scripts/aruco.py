@@ -16,7 +16,7 @@ import sys
 
 #--- Define Tag de teste
 id_to_find  = 200
-marker_size  = 25 #- [cm]
+marker_size  = 20 #- [cm]
 #id_to_find  = 22
 #marker_size  = 3 #- [cm]
 # 
@@ -53,6 +53,7 @@ def roda_todo_frame(imagem):
 	
 	try:
 		cv_image = bridge.compressed_imgmsg_to_cv2(imagem, "bgr8") # imagem compressed
+		cv_image = cv2.flip(cv_image, -1) # Descomente se for robo real
 		#cv_image = bridge.imgmsg_to_cv2(imagem, "bgr8") 			# imagem não compressed
 		#cv_image = cv2.resize(cv_image,(cv_image.shape[1]*2,cv_image.shape[0]*2)) # resize image se necessario
 		
@@ -126,7 +127,6 @@ def roda_todo_frame(imagem):
 
 		# Exibe tela
 		cv2.imshow("Camera", cv_image)
-		cv2.imshow("gray", gray)
 		cv2.waitKey(1)
 	except CvBridgeError as e:
 		print('ex', e)
@@ -134,7 +134,8 @@ def roda_todo_frame(imagem):
 if __name__=="__main__":
 	rospy.init_node("aruco")
 
-	topico_imagem = "/camera/image/compressed"
+	#topico_imagem = "/camera/image/compressed"
+	topico_imagem = "/raspicam/image_raw/compressed"
 	recebe_imagem = rospy.Subscriber(topico_imagem, CompressedImage, roda_todo_frame, queue_size=4, buff_size = 2**24)
 
 	# Teste com imagem não compressed
