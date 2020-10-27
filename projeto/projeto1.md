@@ -97,7 +97,7 @@ Exemplo de como programar usando os markers ARUCO
 
 Launch para subir os controles da garra e RViz
 
-    roslaunch mybot_description mybot_control.launch 
+    roslaunch mybot_description mybot_control2.launch 
 
 Para publicar um topico da garra:
 
