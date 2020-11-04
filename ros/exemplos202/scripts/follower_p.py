@@ -7,6 +7,8 @@
 #  Programming Robots with ROS.
 #  A Practical Introduction to the Robot Operating System
 #  Example 12-5. follower_p.py pag265
+#  
+#  Referendia PD:https://github.com/martinohanlon/RobotPID/blob/master/mock/mock_robot_pd.py 
 
 import rospy
 import numpy as np
