@@ -38,6 +38,12 @@ class Follower:
         
         self.twist = Twist()
         self.laser_msg = LaserScan()
+        
+        self.lastError = 0
+        self.max_vel_linear = 0.2
+        self.max_vel_angular = 2.0
+        self.herts = 250
+        self.rate = rospy.Rate(self.herts)
 
     def laser_callback(self, msg):
         self.laser_msg = msg
@@ -65,13 +71,35 @@ class Follower:
                 cx = int(M['m10']/M['m00'])
                 cy = int(M['m01']/M['m00'])
                 cv2.circle(cv_image, (cx, cy), 20, (0,0,255), -1)
-                # BEGIN CONTROL P Gain
+
+                ### BEGIN CONTROL
                 err = cx - w/2
+                #------controle P simples--------------------
+            
                 self.twist.linear.x = 0.2
                 self.twist.angular.z = -float(err) / 100
+           
+                #------Controle PD simples----------------- tem que validar 
+                                
+            #    kp = 0.2 # ganho P para tunar
+            #    kd = 0.03 # ganoh D para tunar
+            #    
+            #    proporcional = kp *err
+            #    derivativo = kd*(err - self.lastError)/(1.0/self.herts)
+            #    PD = proporcional + derivativo
+            #    
+            #    self.lastError = err
+            #
+            #    self.twist.linear.x =min(self.max_vel_linear*((1-abs(err)/(w/2))**2), self.max_vel_linear)
+            #    self.twist.angular.z = -max(PD/10, -self.max_vel_angular) if PD/10 < 0 else -min(PD/10, self.max_vel_angular) # anti-windup
+                
+                ### END CONTROL
+
+                #publica velocidade
                 self.cmd_vel_pub.publish(self.twist)
-                # END CONTROL
-            #print(self.twist.linear.x, self.twist.angular.z)
+                rospy.loginfo("linear: %f angular: %f", self.twist.linear.x, self.twist.angular.z)
+                self.rate.sleep()
+
             cv2.imshow("window", cv_image)
             cv2.waitKey(1)
         except CvBridgeError as e:
