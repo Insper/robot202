@@ -149,7 +149,7 @@ Visualizar arvore:
 
     rosrun rqt_gui rqt_gui 
     
-Exemple de codigo py
+Exemplo de codigo py
 
 [https://github.com/Insper/robot202/blob/master/ros/exemplos202/scripts/move_garra.py](https://github.com/Insper/robot202/blob/master/ros/exemplos202/scripts/move_garra.py)
 
