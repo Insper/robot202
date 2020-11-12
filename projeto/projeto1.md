@@ -21,11 +21,16 @@ Su Mo Tu We Th Fr Sa
 
 *Conceito C *
 
-Robô é capaz de percorer toda a pista e se chocar contra um creeper da cor certa, voltando depois à pista 
+Robô é capaz de percorer toda a pista e se chocar contra um creeper da cor certa, voltando depois à pista.
+
+No retorno à pista o grupo de alunos não precisa gravar vídeo comprobatório por muito tempo. Apenas o suficiente para demonstrar que o robô encontrou a pista e voltou a executar o código de seguir.
 
 *Conceito B* 
 
 Pega o creeper da cor e ID corretos com a garra e volta para a pista.  
+
+
+No retorno à pista o grupo de alunos não precisa gravar vídeo comprobatório por muito tempo. Apenas o suficiente para demonstrar que o robô encontrou a pista e voltou a executar o código de seguir.
 
 O código tem que estar bem modularizado 
 
