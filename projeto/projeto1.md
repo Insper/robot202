@@ -123,7 +123,7 @@ Exemplo de como programar usando os markers ARUCO
 
 [https://github.com/Insper/robot202/blob/master/ros/exemplos202/scripts/aruco.py](https://github.com/Insper/robot202/blob/master/ros/exemplos202/scripts/aruco.py)
 
-# Intruções sobre os tópicos da garra 
+# Instruções sobre os tópicos da garra 
 
 [Fonte: https://github.com/arnaldojr/mybot_description/](https://github.com/arnaldojr/mybot_description/)
 
