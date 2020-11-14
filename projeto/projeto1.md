@@ -85,8 +85,8 @@ A lista de todas as possibilidades que seu programa pode encontrar [está neste 
 
 # Instruções
 
-Comandos para atualizar os repositórios:
-
+Comandos para atualizar os repositório
+```bash
     cd ~catkin_ws/src/mybot_description
     git stash
     git pull
@@ -95,6 +95,7 @@ Comandos para atualizar os repositórios:
     git pull
     cd ~catkin_ws/src/robot202
     git pull
+```
 
 Para executar:
 
