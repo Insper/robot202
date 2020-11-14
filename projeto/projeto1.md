@@ -62,7 +62,7 @@ Estações válidas: `dog`, `cat`, `bicycle` e `bird`
 
 
 
-### Exemplo de objetivo: 
+### Requisitos que precisam ser filmados: 
 
 Os objetivos abaixo são os que precisam ser filmados (um de cada vez). A tupla objetivo pode ser alterada no código, mas todo o resto do código deve ser flexível. 
 
