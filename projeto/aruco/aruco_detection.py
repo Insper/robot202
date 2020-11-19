@@ -39,6 +39,17 @@ if __name__ == "__main__":
         # parameters.adaptiveThreshWinSizeMax = 1000
 
         corners, ids, rejectedImgPoints = aruco.detectMarkers(gray, aruco_dict) #, parameters=parameters)
+
+        for i in range(len(ids)):
+            print('ID: {}'.format(ids[i]))
+            
+            for c in corners[i]: 
+                for canto in c:
+                    print("Corner {}".format(canto))
+
+
+
+
         aruco.drawDetectedMarkers(frame, corners, ids)
 
 
