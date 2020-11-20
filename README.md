@@ -16,6 +16,8 @@ Abrir repo no Binder
 ## Projetos antigos
 
 
+[Projeto de 2020.2](https://www.youtube.com/playlist?list=PLVU3UhXa4-X_UHmty9CnbFNDrVfFplzVI)
+
 
 [Projeto de 2020.1]
 [Exemplo](https://www.youtube.com/watch?v=53aITsVMrow&t=11s) e [Playlist - vai ser aumentada](https://www.youtube.com/playlist?list=PLh9Ibk8NqrdHtjPx56ALZNvH6T2X7PlAe)
